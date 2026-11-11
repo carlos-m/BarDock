@@ -120,6 +120,7 @@ barra (**Relojes y fecha**, **Altura**, **Posición**, **Alineación**, **Transp
   "barOpacity": 0.9,          // 0.3 - 1.0
   "iconAlignment": "left",    // "center" o "left"
   "showTaskView": true,
+  "renderMode": "hardware",   // "hardware" o "software" (mitad de memoria, algo mas de CPU)
   "language": "en",           // "es" o "en"
 
   "clockFontFamily": null,

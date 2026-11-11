@@ -62,6 +62,12 @@ public sealed class BarSettings
     /// <summary>Muestra el boton de vista de tareas junto al de Inicio.</summary>
     public bool ShowTaskView { get; set; } = true;
 
+    /// <summary>
+    /// "hardware" dibuja con la GPU (mas rapido con animaciones, unos 90 MB mas de memoria) o
+    /// "software" (mitad de memoria, algo mas de CPU al repintar).
+    /// </summary>
+    public string RenderMode { get; set; } = "hardware";
+
     [System.Text.Json.Serialization.JsonIgnore]
     public bool BarAtBottom
     {

@@ -54,6 +54,7 @@ public partial class MainWindow : Window
     private Border _networkButton = null!;
     private Border _volumeButton = null!;
     private SystemStatusSnapshot _status;
+    private bool _statusApplied;
 
     private Brush _foreground = Brushes.White;
     private Brush _subtle = Brushes.Gray;
@@ -297,7 +298,7 @@ public partial class MainWindow : Window
 
         BuildStatus();
         BuildClocks();
-        UpdateStatus();
+        UpdateStatus(force: true);
         BuildTray(force: true);
         BuildStartButton();
     }
@@ -456,7 +457,6 @@ public partial class MainWindow : Window
 
         _extrasSignature = ExtrasSignature(running);
         ApplyMetrics();
-        BuildClocks();
     }
 
     /// <summary>Una app esta anclada si comparte AUMID (o proceso, para .exe/.lnk).</summary>
@@ -981,10 +981,18 @@ public partial class MainWindow : Window
         };
     }
 
-    private void UpdateStatus()
+    private void UpdateStatus(bool force = false)
     {
         var status = SystemStatus.Read();
+
+        // Repintar la barra solo cuando algo cambia de verdad.
+        if (!force && _statusApplied && status == _status)
+        {
+            return;
+        }
+
         _status = status;
+        _statusApplied = true;
 
         _batteryGroup.Visibility = status.HasBattery ? Visibility.Visible : Visibility.Collapsed;
 
@@ -1134,14 +1142,25 @@ public partial class MainWindow : Window
         foreach (var clock in _clockViews)
         {
             var now = Clocks.NowIn(clock.Zone);
-            clock.Time.Text = now.ToString("HH:mm");
+            var text = now.ToString("HH:mm");
+
+            // Asignar solo al cambiar evita repintar la barra cada segundo.
+            if (clock.Time.Text != text)
+            {
+                clock.Time.Text = text;
+            }
         }
 
         var local = DateTime.Now;
 
         if (_dateText is not null)
         {
-            _dateText.Text = local.ToString("dd/MM/yy", CultureInfo.InvariantCulture);
+            var text = local.ToString("dd/MM/yy", CultureInfo.InvariantCulture);
+
+            if (_dateText.Text != text)
+            {
+                _dateText.Text = text;
+            }
         }
 
         if (_dateAliasText is not null)

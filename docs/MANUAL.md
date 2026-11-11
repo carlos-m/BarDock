@@ -120,6 +120,7 @@ Se guardan en `%APPDATA%\BarDock\settings.json` y puedes editarlos a mano y **Re
   "barOpacity": 0.9,           // 0.3 - 1.0
   "iconAlignment": "center",   // "center" o "left"
   "showTaskView": true,
+  "renderMode": "hardware",     // "hardware" o "software"
   "language": "es",            // "es" o "en"
 
   "clockFontFamily": null,
@@ -147,6 +148,8 @@ Se guardan en `%APPDATA%\BarDock\settings.json` y puedes editarlos a mano y **Re
 - **`color`** acepta `#RRGGBB` o un nombre (`Gold`, `Tomato`…). Vacío = color del tema.
 - **`alias`** es el texto vertical; si falta se deduce de la zona (`Romance Standard Time` → `ES`).
 - **`barOpacity`**: opacidad del fondo de la barra.
+- **`renderMode`**: `hardware` (por defecto) usa la GPU; `software` dibuja con la CPU y usa **unos
+  90 MB menos** de memoria, a cambio de algo más de CPU al repintar y animaciones menos suaves.
 - La barra de Windows se oculta con una **región vacía** para no romper la bandeja nativa.
 
 ## Consejos

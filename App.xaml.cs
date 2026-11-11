@@ -65,6 +65,14 @@ public partial class App : Application
 
         var settings = SettingsStore.Load();
         Loc.Set(settings.Language);
+
+        // "software" ahorra ~90 MB de memoria a cambio de algo mas de CPU al repintar.
+        if (string.Equals(settings.RenderMode, "software", StringComparison.OrdinalIgnoreCase))
+        {
+            System.Windows.Media.RenderOptions.ProcessRenderMode =
+                System.Windows.Interop.RenderMode.SoftwareOnly;
+        }
+
         var window = new MainWindow(settings) { Title = "BarDock" };
         MainWindow = window;
         window.Show();

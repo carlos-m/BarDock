@@ -17,19 +17,43 @@ public readonly record struct SystemStatusSnapshot(
 /// <summary>Estado de bateria, red y volumen del sistema.</summary>
 public static class SystemStatus
 {
+    /// <summary>Enumerar los adaptadores cuesta ~25 ms: no se hace en cada consulta.</summary>
+    private static readonly TimeSpan NetworkStaleAfter = TimeSpan.FromMinutes(10);
+
+    private static readonly object Gate = new();
+
+    private static NetworkInfo _network = new(false, false, "");
+    private static DateTime _networkReadUtc = DateTime.MinValue;
+    private static bool _hasNetwork;
+    private static bool _refreshingNetwork;
+
+    static SystemStatus()
+    {
+        try
+        {
+            NetworkChange.NetworkAvailabilityChanged += (_, _) => InvalidateNetwork();
+            NetworkChange.NetworkAddressChanged += (_, _) => InvalidateNetwork();
+        }
+        catch
+        {
+            // sin eventos se refresca por antiguedad
+        }
+    }
+
     public static SystemStatusSnapshot Read()
     {
         var (hasBattery, percent, charging) = ReadBattery();
-        var (available, wireless, name) = ReadNetwork();
+        var network = NetworkCached();
+
         var (volumeAvailable, muted, volume) = Audio.Read();
 
         return new SystemStatusSnapshot(
             hasBattery,
             percent,
             charging,
-            available,
-            wireless,
-            name,
+            network.Available,
+            network.Wireless,
+            network.Name,
             volumeAvailable,
             muted,
             volume);
@@ -58,13 +82,64 @@ public static class SystemStatus
         }
     }
 
-    private static (bool Available, bool Wireless, string Name) ReadNetwork()
+    /// <summary>
+    /// Ultimo estado de red conocido. La primera lectura es sincrona; despues solo se vuelve a
+    /// enumerar en segundo plano cuando cambia la red o pasa el tiempo de validez.
+    /// </summary>
+    private static NetworkInfo NetworkCached()
+    {
+        lock (Gate)
+        {
+            if (_hasNetwork)
+            {
+                if (DateTime.UtcNow - _networkReadUtc > NetworkStaleAfter && !_refreshingNetwork)
+                {
+                    _refreshingNetwork = true;
+                    ThreadPool.QueueUserWorkItem(_ =>
+                    {
+                        var fresh = ReadNetwork();
+                        lock (Gate)
+                        {
+                            _network = fresh;
+                            _networkReadUtc = DateTime.UtcNow;
+                            _hasNetwork = true;
+                            _refreshingNetwork = false;
+                        }
+                    });
+                }
+
+                return _network;
+            }
+        }
+
+        // Primer uso (arranque, antes de dibujar la barra): una sola enumeracion.
+        var first = ReadNetwork();
+        lock (Gate)
+        {
+            _network = first;
+            _networkReadUtc = DateTime.UtcNow;
+            _hasNetwork = true;
+        }
+
+        return first;
+    }
+
+    private static void InvalidateNetwork()
+    {
+        lock (Gate)
+        {
+            // Marca obsoleto: el proximo Tick lo refresca en segundo plano.
+            _networkReadUtc = DateTime.MinValue;
+        }
+    }
+
+    private static NetworkInfo ReadNetwork()
     {
         try
         {
             if (!NetworkInterface.GetIsNetworkAvailable())
             {
-                return (false, false, "");
+                return new NetworkInfo(false, false, "");
             }
 
             var active = NetworkInterface.GetAllNetworkInterfaces()
@@ -75,7 +150,7 @@ public static class SystemStatus
 
             if (active.Count == 0)
             {
-                return (false, false, "");
+                return new NetworkInfo(false, false, "");
             }
 
             var wireless = active.FirstOrDefault(nic =>
@@ -83,17 +158,19 @@ public static class SystemStatus
 
             if (wireless is not null)
             {
-                return (true, true, wireless.Name);
+                return new NetworkInfo(true, true, wireless.Name);
             }
 
             var wired = active.FirstOrDefault(nic =>
                 nic.NetworkInterfaceType == NetworkInterfaceType.Ethernet);
 
-            return (true, false, (wired ?? active[0]).Name);
+            return new NetworkInfo(true, false, (wired ?? active[0]).Name);
         }
         catch
         {
-            return (false, false, "");
+            return new NetworkInfo(false, false, "");
         }
     }
+
+    private readonly record struct NetworkInfo(bool Available, bool Wireless, string Name);
 }
