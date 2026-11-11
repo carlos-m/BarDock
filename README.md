@@ -1,3 +1,7 @@
+<p align="right">
+  <b>English</b> · <a href="README.es.md">Español</a>
+</p>
+
 <p align="center">
   <img src="docs/logo.png" alt="BarDock" width="520">
 </p>
@@ -16,96 +20,95 @@
   <img src="docs/captura.png" alt="BarDock">
 </p>
 
-**BarDock** es una barra superior minimalista para Windows 11: tus iconos con magnificación
-tipo macOS, relojes de varias zonas horarias, fecha, estado del sistema, bandeja nativa y vista
-previa de las ventanas de cada aplicación. Sustituye la barra de tareas de Windows y se adapta a
-cómo quieras trabajar: arriba o abajo, iconos centrados o a la izquierda, en español o inglés.
+**BarDock** is a minimal top bar for Windows 11: your icons with dock-style magnification, clocks
+for several time zones, the date, system status, the native tray and a preview of each app's
+windows. It replaces the Windows taskbar and adapts to the way you work: top or bottom, icons
+centered or aligned left, in English or Spanish.
 
-## Documentación
+## Documentation
 
-- **[Guía de instalación](docs/INSTALL.md)**: requisitos, instalación, actualización, desinstalación
-  y problemas frecuentes.
-- **[Manual de usuario](docs/MANUAL.md)**: todo lo que hace la barra, menús, relojes, ajustes y
-  preguntas frecuentes.
+- **[Installation guide](docs/INSTALL.md)**: requirements, installing, updating, uninstalling and
+  common problems.
+- **[User manual](docs/MANUAL.md)**: everything the bar does, menus, clocks, settings and FAQ.
 
-## Características
+## Features
 
-- **Iconos con magnificación** estilo dock: crecen hacia dentro de la pantalla mientras el icono
-  bajo el cursor no se mueve, y la línea de estado verde crece con él.
-- **Ventanas por icono**: al pasar el ratón se listan las ventanas abiertas de la app; al hacer
-  clic se trae **solo esa** al frente.
-- **Barra de Inicio y vista de tareas** reales, sin la barra de Windows.
-- **Bandeja nativa**: un chevron abre el panel real de iconos ocultos de Windows, con sus menús
-  contextuales originales.
-- **Relojes** de varias zonas con alias vertical configurable (`E`/`S`), tipografía, negrita,
-  color por zona, tamaño e interlineado comunes, y **fecha** con el día de la semana.
-- **Estado del sistema**: batería, red y volumen (clic y rueda para el volumen).
-- **Personalización**: posición arriba/abajo, alineación, altura, tamaño/ampliación/separación de
-  iconos, transparencia y **español/inglés**.
-- **Sin dependencias**: instalador autocontenido; no hace falta .NET ni permisos de administrador.
+- **Magnified icons**, dock style: they grow toward the inside of the screen while the icon under
+  the cursor stays put, and the green running indicator grows with it.
+- **Windows per icon**: hovering lists the app's open windows; clicking brings **only that one** to
+  the front.
+- **Real Start menu and task view**, without the Windows taskbar.
+- **Native tray**: a chevron opens the real Windows overflow panel, with its original context
+  menus.
+- **Clocks** for several zones with a configurable vertical alias (`E`/`S`), font, bold, per-zone
+  color, shared size and line spacing, plus the **date** with the weekday.
+- **System status**: battery, network and volume (click and wheel for volume).
+- **Customization**: top/bottom position, alignment, height, icon size/magnification/spacing,
+  transparency and **English/Spanish**.
+- **No dependencies**: self-contained installer; no .NET and no administrator rights.
 
-## Instalar
+## Install
 
-Descarga `BarDockSetup.exe` de la sección **Releases** y ejecútalo. Los pasos detallados están en
-la **[guía de instalación](docs/INSTALL.md)**.
+Download `BarDockSetup.exe` from **Releases** and run it. The detailed steps are in the
+**[installation guide](docs/INSTALL.md)**.
 
-- Instalación **por usuario** en `%LOCALAPPDATA%\Programs\BarDock` (sin administrador).
-- Crea accesos directos en Inicio y, opcionalmente, en el escritorio.
-- Se desinstala desde **Configuración → Aplicaciones → BarDock**.
-- Instalación silenciosa: `BarDockSetup.exe /S`.
+- **Per-user** install in `%LOCALAPPDATA%\Programs\BarDock` (no administrator).
+- Creates Start menu shortcuts and, optionally, a desktop shortcut.
+- Uninstall from **Settings → Apps → BarDock**.
+- Silent install: `BarDockSetup.exe /S`.
 
-> Windows puede avisar de que el instalador no está firmado: **Más información → Ejecutar de todas
-> formas**. Es un ejecutable propio, sin firma de código.
+> Windows may warn that the installer is unsigned: **More info → Run anyway**. It is our own
+> executable, without a code-signing certificate.
 
-## Licencia
+## License
 
-**MIT** — software libre y abierto: puedes usar, copiar, modificar, fusionar, publicar, distribuir,
-sublicenciar y vender copias, conservando el aviso de copyright y la licencia. Consulta
-[LICENSE](LICENSE).
+**MIT** — free and open software: you may use, copy, modify, merge, publish, distribute,
+sublicense and sell copies, keeping the copyright notice and the license. See [LICENSE](LICENSE).
 
-## Ejecutar en desarrollo
+## Run from source
 
 ```bat
 run.cmd
 ```
 
-o compila y ejecuta:
+or build and run:
 
 ```bat
 dotnet run --project BarDock.csproj
 ```
 
-`publish.cmd` genera `dist\` (versión ligera, requiere el runtime .NET Desktop 8) y
-`build-setup.cmd` genera `dist\BarDockSetup.exe` (autocontenido, con la app incrustada).
+`publish.cmd` produces `dist\` (lightweight build, needs the .NET Desktop 8 runtime) and
+`build-setup.cmd` produces `dist\BarDockSetup.exe` (self-contained, with the app embedded).
 
-## Uso
+## Usage
 
-| Acción | Resultado |
+| Action | Result |
 | --- | --- |
-| Pasar el ratón por la barra | Los iconos se amplían; el icono bajo el cursor se queda quieto |
-| Pasar el ratón por un icono abierto | Lista de **sus ventanas**; el clic trae **solo esa** al frente |
-| Clic en el logo de Windows | Abre el **menú Inicio** (clic derecho: aplicaciones y configuración) |
-| Clic en la vista de tareas | Abre **Win+Tab** (escritorios virtuales); se puede ocultar |
-| Clic en el chevron de la bandeja | Abre el **panel nativo de iconos ocultos** de Windows |
-| Clic en la campana | Centro de notificaciones de Windows |
-| Clic en batería / red / volumen | Panel correspondiente (volumen: clic silencia, rueda ajusta) |
-| Clic derecho en la barra | Añadir app, relojes y fecha, tamaños, posición, alineación, transparencia, idioma, sustituir la barra de Windows, inicio con Windows, recargar, editar JSON, salir |
-| Arrastrar un `.exe` / `.lnk` / `.url` | Lo añade a la barra |
+| Hover the bar | Icons magnify; the icon under the cursor stays still |
+| Hover an open icon | List of **its windows**; clicking brings **only that one** to the front |
+| Click the Windows logo | Opens the **Start menu** (right click: all apps and settings) |
+| Click task view | Opens **Win+Tab** (virtual desktops); can be hidden |
+| Click the tray chevron | Opens the **Windows overflow panel** |
+| Click the bell | Windows notification center |
+| Click battery / network / volume | The matching panel (volume: click mutes, wheel adjusts) |
+| Right click the bar | Add app, clocks and date, sizes, position, alignment, transparency, language, replace the Windows taskbar, start with Windows, reload, edit JSON, quit |
+| Drag an `.exe` / `.lnk` / `.url` | Adds it to the bar |
 
-La primera vez se rellena con las apps **ancladas de verdad** a la barra de tareas (leídas de
-`HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Taskband`) y con las que estén abiertas.
+On first run the bar is filled with the apps **actually pinned** to the taskbar (read from
+`HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Taskband`) and with the ones that are
+already open.
 
-### Barra de Windows
+### The Windows taskbar
 
-Con «Sustituir la barra de Windows» activado, la barra original se oculta mediante una **región
-vacía** (`SetWindowRgn`), así que no se dibuja pero el shell conserva su bandeja. Al desactivarlo,
-la barra vuelve y BarDock se coloca **junto** a ella para que sigas pudiendo usar su menú.
+With "Replace the Windows taskbar" enabled, the original bar is hidden by giving it an **empty
+region** (`SetWindowRgn`), so it is not drawn but the shell keeps its tray. When you turn it off,
+the taskbar comes back and BarDock moves **next to it** so you can still use its menu.
 
-## Configuración
+## Configuration
 
-Los ajustes viven en `%APPDATA%\BarDock\settings.json` y se editan desde el menú contextual de la
-barra (**Relojes y fecha**, **Altura**, **Posición**, **Alineación**, **Transparencia**,
-**Idioma**…) o a mano y luego **Recargar**.
+Settings live in `%APPDATA%\BarDock\settings.json` and are edited from the bar's context menu
+(**Clocks and date**, **Height**, **Position**, **Alignment**, **Transparency**, **Language**…) or
+by hand and then **Reload**.
 
 ```jsonc
 {
@@ -116,67 +119,68 @@ barra (**Relojes y fecha**, **Altura**, **Posición**, **Alineación**, **Transp
   "spacing": 8,
   "topMargin": 0,
   "replaceTaskbar": true,
-  "barPosition": "top",       // "top" o "bottom"
+  "barPosition": "top",       // "top" or "bottom"
   "barOpacity": 0.9,          // 0.3 - 1.0
-  "iconAlignment": "left",    // "center" o "left"
+  "iconAlignment": "left",    // "center" or "left"
   "showTaskView": true,
-  "renderMode": "hardware",   // "hardware" o "software" (mitad de memoria, algo mas de CPU)
-  "language": "en",           // "es" o "en"
+  "renderMode": "hardware",   // "hardware" or "software" (half the memory, a bit more CPU)
+  "language": "en",           // "es" or "en"
 
   "clockFontFamily": null,
   "clockFontSize": 17,
   "clockBold": false,
   "clockLetterSpacing": 0.95,
 
-  "dateAlias": "",            // vacío = día de la semana (WED, MIÉ...)
+  "dateAlias": "",            // empty = weekday (WED, MIÉ...)
   "dateColor": null,
 
   "items": [
     { "path": "shell:AppsFolder\\MSTeams_8wekyb3d8bbwe!MSTeams", "name": "Microsoft Teams" },
-    { "path": "C:\\Ruta\\App.exe", "name": "Nombre opcional" }
+    { "path": "C:\\Path\\App.exe", "name": "Optional name" }
   ],
 
   "clocks": [
     { "label": "Madrid",   "zone": "Romance Standard Time", "alias": "ES", "color": null },
     { "label": "Santiago", "zone": "Pacific SA Standard Time", "alias": "CL" },
-    { "label": "Lisboa",   "zone": "GMT Standard Time", "alias": "PT" },
+    { "label": "Lisbon",   "zone": "GMT Standard Time", "alias": "PT" },
     { "label": "Tel Aviv", "zone": "Israel Standard Time", "alias": "IL" }
   ]
 }
 ```
 
-- `alias` es el texto vertical de 2-3 letras; si falta se deduce de la zona.
-- `color` (por reloj o `dateColor`) acepta `#RRGGBB` o un nombre (`Gold`, `Tomato`…).
-- La fecha usa el idioma de la barra: `WED` en inglés, `MIÉ` en español.
+- `alias` is the 2-3 letter vertical text; if missing it is derived from the zone.
+- `color` (per clock or `dateColor`) accepts `#RRGGBB` or a name (`Gold`, `Tomato`…).
+- The date follows the bar's language: `WED` in English, `MIÉ` in Spanish.
 
-## Cómo está hecho
+## How it works
 
-- **WPF / .NET 8**: ventana `WindowStyle=None` + `AllowsTransparency`, siempre visible con
-  `Topmost` y oculta de Alt+Tab con `WS_EX_TOOLWINDOW`.
-- **Magnificación**: gaussiana según la distancia horizontal del cursor, con muelle exponencial en
-  `CompositionTarget.Rendering` (se detiene en reposo). La expansión se calcula centrada y cada
-  contenedor se desplaza entero, de modo que el icono y su zona clicable coinciden siempre.
-- **Barra de tareas**: `FindWindow("Shell_TrayWnd")` + **región vacía**; se restaura al salir.
-- **Área de trabajo**: `SPI_SETWORKAREA` con `fWinIni = 0`; al cambiar alto o borde se recolocan
-  las ventanas maximizadas (`ShowWindow`).
-- **Bandeja**: el chevron invoca por UI Automation el panel nativo
-  `TopLevelWindowForOverflowXamlIsland`.
-- **Inicio / vista de tareas**: inyección de teclas (`SendInput`) sobre el shell real.
-- **Iconos**: `shell:AppsFolder\<AUMID>` con `IShellItemImageFactory` para apps empaquetadas;
-  `PrivateExtractIcons` → `IShellItemImageFactory` → `SHGetFileInfo` para el resto.
+- **WPF / .NET 8**: `WindowStyle=None` + `AllowsTransparency` window, always on top with `Topmost`
+  and hidden from Alt+Tab with `WS_EX_TOOLWINDOW`.
+- **Magnification**: Gaussian falloff based on the cursor's horizontal distance, with an
+  exponential spring in `CompositionTarget.Rendering` (stops at rest). The expansion is computed
+  from the center and each container is shifted as a whole, so the icon and its clickable area
+  always match.
+- **Taskbar**: `FindWindow("Shell_TrayWnd")` + **empty region**; restored on exit.
+- **Work area**: `SPI_SETWORKAREA` with `fWinIni = 0`; when the height or edge changes, maximized
+  windows are moved back (`ShowWindow`).
+- **Tray**: the chevron drives the native `TopLevelWindowForOverflowXamlIsland` panel through UI
+  Automation.
+- **Start / task view**: key injection (`SendInput`) into the real shell.
+- **Icons**: `shell:AppsFolder\<AUMID>` with `IShellItemImageFactory` for packaged apps;
+  `PrivateExtractIcons` → `IShellItemImageFactory` → `SHGetFileInfo` for the rest.
 
-## Limitaciones
+## Limitations
 
-- Solo el **monitor principal**.
-- No usa el *blur* real de DWM: la barra es translúcida, no acrylic.
-- Las apps empaquetadas se lanzan por AUMID; si Windows cambia de versión, puede variar el icono.
+- **Primary monitor only**.
+- No real DWM blur: the bar is translucent, not acrylic.
+- Packaged apps are launched by AUMID; if Windows changes, the icon may differ.
 
-## Diagnóstico
+## Diagnostics
 
 ```bat
 BarDock.exe --dump-icons
 BarDock.exe --dump-windows
 ```
 
-`--dump-icons` deja los iconos extraídos en `%TEMP%\barDock-icons`; `--dump-windows` deja en
-`%TEMP%\barDock-windows.txt` las ventanas agrupadas por aplicación.
+`--dump-icons` writes the extracted icons to `%TEMP%\barDock-icons`; `--dump-windows` writes the
+windows grouped by app to `%TEMP%\barDock-windows.txt`.

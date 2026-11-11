@@ -1,67 +1,65 @@
-# Manual de usuario
+# User manual
 
-BarDock es una barra superior minimalista para Windows 11. Sustituye la barra de tareas y reúne
-tus aplicaciones, la bandeja del sistema, relojes y el estado del equipo en una sola franja
-discreta.
+**English** · [Español](MANUAL.es.md)
+
+BarDock is a minimal top bar for Windows 11. It replaces the taskbar and gathers your apps, the
+system tray, clocks and the machine's status into a single discreet strip.
 
 > **Your desktop, your way.**
 
-## La barra de un vistazo
+## The bar at a glance
 
 ```
-[Inicio] [Vista de tareas]   …iconos de apps…      [chevron] [campana] [batería] [red] [volumen] | [ES 12:00] [CL 08:00] … | [WED 11/11/26]
+[Start] [Task view]   …app icons…      [chevron] [bell] [battery] [network] [volume] | [ES 12:00] [CL 08:00] … | [WED 11/11/26]
 ```
 
-- **Izquierda**: botón de Inicio y, opcionalmente, vista de tareas.
-- **Centro**: aplicaciones ancladas y las que tienes abiertas.
-- **Derecha**: bandeja nativa (chevron), notificaciones (campana), estado del sistema, relojes y
-  fecha.
+- **Left**: Start button and, optionally, task view.
+- **Center**: pinned apps and the ones you have open.
+- **Right**: native tray (chevron), notifications (bell), system status, clocks and date.
 
-## Iconos de aplicaciones
+## App icons
 
-- **Pasar el ratón**: los iconos se amplían en onda. El icono bajo el cursor **no se mueve** y sus
-  vecinos se abren a ambos lados; la línea verde crece con él.
-- **Clic izquierdo**: abre la app o trae al frente su ventana (con un pequeño rebote).
-- **Clic derecho**: Abrir, Mostrar en el Explorador y Quitar de la barra.
-- **Pasar el ratón por una app abierta**: aparece la lista de **sus ventanas** con el título de
-  cada una. Al hacer clic en una entrada se trae **solo esa ventana** al frente.
-- **Arrastrar un `.exe`, `.lnk` o `.url`** sobre la barra: se añade.
-- **Anclar**: las apps que quieras fijas se añaden con **clic derecho → Añadir aplicación…**.
-  Las demás aparecen y desaparecen solas cuando se abren y se cierran.
+- **Hover**: icons magnify in a wave. The icon under the cursor **does not move** and its neighbors
+  open on both sides; the green line grows with it.
+- **Left click**: opens the app or brings its window to the front (with a small bounce).
+- **Right click**: Open, Show in Explorer and Remove from the bar.
+- **Hover an open app**: a list of **its windows** appears with each title. Clicking an entry
+  brings **only that window** to the front.
+- **Drag an `.exe`, `.lnk` or `.url`** onto the bar: it is added.
+- **Pin**: apps you want fixed are added with **right click → Add app…**. The rest appear and
+  disappear on their own as they open and close.
 
-## Botones del extremo izquierdo
+## Far-left buttons
 
-- **Logo de Windows**: abre el **menú Inicio** real. Con **clic derecho** ofrece *Todas las
-  aplicaciones* y *Configuración*.
-- **Vista de tareas** (opcional): abre la vista de tareas de Windows (`Win + Tab`) para cambiar de
-  escritorio virtual. Se muestra u oculta en **clic derecho → Botón de vista de tareas**.
+- **Windows logo**: opens the real **Start menu**. **Right click** offers *All apps* and
+  *Settings*.
+- **Task view** (optional): opens the Windows task view (`Win + Tab`) to switch virtual desktops.
+  Show or hide it with **right click → Task view button**.
 
-## Bandeja y notificaciones
+## Tray and notifications
 
-- **Chevron**: abre el **panel nativo de iconos ocultos de Windows**, con los iconos reales y sus
-  menús contextuales originales (OneDrive, WhatsApp, Teams, Bluetooth…). Es la bandeja de Windows,
-  no una copia.
-- **Campana**: abre el **centro de notificaciones** de Windows.
-- **Clic derecho en la bandeja**: centro de notificaciones, ajustes de notificaciones y de la barra
-  de tareas.
+- **Chevron**: opens the **native Windows overflow panel**, with the real icons and their original
+  context menus (OneDrive, WhatsApp, Teams, Bluetooth…). It is the Windows tray, not a copy.
+- **Bell**: opens the Windows **notification center**.
+- **Right click the tray**: notification center, notification settings and taskbar settings.
 
-## Estado del sistema
+## System status
 
-- **Batería**: porcentaje; se pone roja con carga baja.
-- **Red**: Wi-Fi o cable; el tooltip muestra la red.
-- **Volumen**: clic para silenciar/activar, rueda del ratón para subir o bajar.
-- **Clic derecho** sobre los indicadores: Red e Internet, Sonido, Energía y batería.
+- **Battery**: percentage; turns red on low charge.
+- **Network**: Wi-Fi or wired; the tooltip shows the network name.
+- **Volume**: click to mute/unmute, mouse wheel to raise or lower.
+- **Right click** the indicators: Network & internet, Sound, Power & battery.
 
-## Relojes y fecha
+## Clocks and date
 
-Cada reloj muestra un **alias vertical** de 2-3 letras y la hora:
+Each clock shows a 2-3 letter **vertical alias** and the time:
 
 ```
 E
 S  12:47
 ```
 
-La fecha sigue el mismo patrón con el **día de la semana** en el idioma de la barra:
+The date follows the same pattern with the **weekday** in the bar's language:
 
 ```
 W
@@ -69,43 +67,43 @@ E  11/11/26
 D
 ```
 
-### Personalizar
+### Customize
 
-**Clic derecho en los relojes → Relojes y fecha…**
+**Right click the clocks → Clocks and date…**
 
-- **Estilo general** (común a relojes y fecha): fuente, negrita, tamaño e interlineado.
-- **Por reloj**: zona horaria, alias y color (con selector de color).
-- **Fecha**: alias (vacío = día de la semana) y color.
-- **Añadir / Quitar** relojes.
-- La vista previa se actualiza mientras cambias los valores.
+- **General style** (shared by clocks and date): font, bold, size and line spacing.
+- **Per clock**: time zone, alias and color (with a color picker).
+- **Date**: alias (empty = weekday) and color.
+- **Add / Remove** clocks.
+- The preview updates as you change the values.
 
-## Menú de la barra
+## Bar menu
 
-**Clic derecho en una zona vacía de la barra**:
+**Right click an empty area of the bar**:
 
-| Opción | Para qué |
+| Option | What it does |
 | --- | --- |
-| Añadir aplicación… | Ancla un `.exe`, `.lnk` o `.url` |
-| Relojes y fecha… | Personaliza relojes, fecha y estilos |
-| Centro de notificaciones | Abre el panel de notificaciones |
-| Posición de la barra | Arriba o abajo (la ampliación cambia de sentido) |
-| Alineación de iconos | Centrados o a la izquierda, junto a Inicio |
-| Altura de la barra | 36 a 72 px |
-| Tamaño del icono | 18 a 36 px |
-| Ampliación | Escala máxima al pasar el ratón |
-| Separación | Espacio entre iconos |
-| Transparencia | 100 % (opaca) a 50 % |
-| Idioma | Español o English (menús, configuración y día de la fecha) |
-| Botón de vista de tareas | Mostrar u ocultar |
-| Sustituir la barra de Windows | Oculta la barra de Windows mientras BarDock está abierto |
-| Iniciar con Windows | Arranque automático al iniciar sesión |
-| Recargar | Relee `settings.json` |
-| Editar settings.json | Abre el archivo de ajustes |
-| Salir | Cierra BarDock y restaura la barra de Windows |
+| Add app… | Pins an `.exe`, `.lnk` or `.url` |
+| Clocks and date… | Customizes clocks, date and styles |
+| Notification center | Opens the notification panel |
+| Bar position | Top or bottom (magnification flips direction) |
+| Icon alignment | Centered or left, next to Start |
+| Bar height | 36 to 72 px |
+| Icon size | 18 to 36 px |
+| Magnification | Maximum scale on hover |
+| Spacing | Gap between icons |
+| Transparency | 100 % (opaque) to 50 % |
+| Language | English or Spanish (menus, settings and the date's weekday) |
+| Task view button | Show or hide |
+| Replace the Windows taskbar | Hides the Windows taskbar while BarDock is running |
+| Start with Windows | Automatic start when you sign in |
+| Reload | Re-reads `settings.json` |
+| Edit settings.json | Opens the settings file |
+| Quit | Closes BarDock and restores the Windows taskbar |
 
-## Ajustes (`settings.json`)
+## Settings (`settings.json`)
 
-Se guardan en `%APPDATA%\BarDock\settings.json` y puedes editarlos a mano y **Recargar**.
+Stored in `%APPDATA%\BarDock\settings.json`; you can edit them by hand and then **Reload**.
 
 ```jsonc
 {
@@ -116,74 +114,75 @@ Se guardan en `%APPDATA%\BarDock\settings.json` y puedes editarlos a mano y **Re
   "spacing": 8,
   "topMargin": 0,
   "replaceTaskbar": true,
-  "barPosition": "top",        // "top" o "bottom"
+  "barPosition": "top",        // "top" or "bottom"
   "barOpacity": 0.9,           // 0.3 - 1.0
-  "iconAlignment": "center",   // "center" o "left"
+  "iconAlignment": "center",   // "center" or "left"
   "showTaskView": true,
-  "renderMode": "hardware",     // "hardware" o "software"
-  "language": "es",            // "es" o "en"
+  "renderMode": "hardware",    // "hardware" or "software"
+  "language": "en",            // "es" or "en"
 
   "clockFontFamily": null,
   "clockFontSize": 14,
   "clockBold": false,
   "clockLetterSpacing": 0.95,
 
-  "dateAlias": "",             // vacío = día de la semana
+  "dateAlias": "",             // empty = weekday
   "dateColor": null,
 
   "items": [
     { "path": "shell:AppsFolder\\MSTeams_8wekyb3d8bbwe!MSTeams", "name": "Microsoft Teams" },
-    { "path": "C:\\Ruta\\App.exe", "name": "Nombre opcional" }
+    { "path": "C:\\Path\\App.exe", "name": "Optional name" }
   ],
 
   "clocks": [
     { "label": "Madrid",   "zone": "Romance Standard Time", "alias": "ES", "color": null },
     { "label": "Santiago", "zone": "Pacific SA Standard Time", "alias": "CL" },
-    { "label": "Lisboa",   "zone": "GMT Standard Time", "alias": "PT" },
+    { "label": "Lisbon",   "zone": "GMT Standard Time", "alias": "PT" },
     { "label": "Tel Aviv", "zone": "Israel Standard Time", "alias": "IL" }
   ]
 }
 ```
 
-- **`color`** acepta `#RRGGBB` o un nombre (`Gold`, `Tomato`…). Vacío = color del tema.
-- **`alias`** es el texto vertical; si falta se deduce de la zona (`Romance Standard Time` → `ES`).
-- **`barOpacity`**: opacidad del fondo de la barra.
-- **`renderMode`**: `hardware` (por defecto) usa la GPU; `software` dibuja con la CPU y usa **unos
-  90 MB menos** de memoria, a cambio de algo más de CPU al repintar y animaciones menos suaves.
-- La barra de Windows se oculta con una **región vacía** para no romper la bandeja nativa.
+- **`color`** accepts `#RRGGBB` or a name (`Gold`, `Tomato`…). Empty = theme color.
+- **`alias`** is the vertical text; if missing it is derived from the zone
+  (`Romance Standard Time` → `ES`).
+- **`barOpacity`**: opacity of the bar's background.
+- **`renderMode`**: `hardware` (default) uses the GPU; `software` draws on the CPU and uses **about
+  90 MB less** memory, at the cost of a bit more CPU when repainting and less smooth animations.
+- The Windows taskbar is hidden with an **empty region** so the native tray keeps working.
 
-## Consejos
+## Tips
 
-- Si quieres la barra abajo, cambia **Posición** y el área de trabajo se reserva en el borde
-  inferior; las ventanas maximizadas se recolocan solas.
-- Con **iconos a la izquierda**, el dock empieza junto al botón de Inicio.
-- La transparencia al 50 % deja ver el escritorio; los iconos y textos siguen opacos.
-- Puedes tener BarDock sin sustituir la barra de Windows: se coloca justo al lado y sigues usando
-  la bandeja original.
+- If you want the bar at the bottom, change **Position** and the work area is reserved at the bottom
+  edge; maximized windows are moved automatically.
+- With **left-aligned icons**, the dock starts next to the Start button.
+- 50 % transparency lets the desktop show through; icons and text stay opaque.
+- You can run BarDock without replacing the Windows taskbar: it sits right next to it and you keep
+  using the original tray.
 
-## Diagnóstico
+## Diagnostics
 
 ```bat
 BarDock.exe --dump-icons
 BarDock.exe --dump-windows
 ```
 
-- `--dump-icons`: guarda en `%TEMP%\barDock-icons` los iconos tal y como los extrae el shell.
-- `--dump-windows`: guarda en `%TEMP%\barDock-windows.txt` las ventanas agrupadas por app.
+- `--dump-icons`: saves the icons as the shell extracts them, in `%TEMP%\barDock-icons`.
+- `--dump-windows`: saves the windows grouped by app to `%TEMP%\barDock-windows.txt`.
 
-## Preguntas frecuentes
+## FAQ
 
-**¿Puedo tener dos monitores?**
-BarDock vive en el monitor principal.
+**Can I use two monitors?**
+BarDock lives on the primary monitor.
 
-**¿Necesito .NET?**
-No con el instalador: es autocontenido.
+**Do I need .NET?**
+Not with the installer: it is self-contained.
 
-**¿Se puede usar sin ocultar la barra de Windows?**
-Sí: desactiva *Sustituir la barra de Windows*.
+**Can I use it without hiding the Windows taskbar?**
+Yes: turn off *Replace the Windows taskbar*.
 
-**¿Qué pasa si cierro BarDock?**
-La barra de Windows y el área de trabajo se restauran automáticamente.
+**What happens if I close BarDock?**
+The Windows taskbar and the work area are restored automatically.
 
-**¿Se pierden los ajustes al actualizar?**
-No; se conservan en `%APPDATA%\BarDock`.
+**Are settings lost when updating?**
+No; they are kept in `%APPDATA%\BarDock`.

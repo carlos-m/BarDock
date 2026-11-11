@@ -1,85 +1,86 @@
-# Guía de instalación
+# Installation guide
 
-## Requisitos
+**English** · [Español](INSTALL.es.md)
 
-- **Windows 11** de 64 bits (probado en 23H2/24H2/25H2).
-- Unos **250 MB** libres.
-- **No** hace falta instalar .NET ni tener permisos de administrador: el instalador es autocontenido
-  y se instala por usuario.
+## Requirements
 
-## Instalar
+- **Windows 11** 64-bit (tested on 23H2/24H2/25H2).
+- About **250 MB** free.
+- You do **not** need to install .NET or have administrator rights: the installer is
+  self-contained and installs per user.
 
-1. Descarga **`BarDockSetup.exe`** desde la sección **Releases** del repositorio.
-2. Haz doble clic en el archivo.
-3. Si Windows muestra el aviso **«Windows protegió tu PC»**, pulsa **Más información →
-   Ejecutar de todas formas**. Es normal: el instalador no está firmado con un certificado de
-   código.
-4. Elige las opciones:
-   - **Crear acceso directo en el escritorio**.
-   - **Iniciar con Windows**.
-   - **Abrir BarDock al terminar**.
-5. Pulsa **Instalar**. Al terminar, BarDock arranca y la barra de tareas de Windows se oculta.
+## Install
 
-### Instalación silenciosa
+1. Download **`BarDockSetup.exe`** from the repository's **Releases** section.
+2. Double-click the file.
+3. If Windows shows **"Windows protected your PC"**, click **More info → Run anyway**. This is
+   normal: the installer is not signed with a code-signing certificate.
+4. Pick the options:
+   - **Create a desktop shortcut**.
+   - **Start with Windows**.
+   - **Open BarDock when done**.
+5. Click **Install**. When it finishes, BarDock starts and the Windows taskbar is hidden.
+
+### Silent install
 
 ```bat
 BarDockSetup.exe /S
 ```
 
-Instala con las opciones por defecto (acceso directo en el escritorio, sin arranque automático y
-sin abrir al terminar).
+Installs with the default options (desktop shortcut, no auto-start and no launch at the end).
 
-## Dónde se instala
+## Where it installs
 
-| Elemento | Ruta |
+| Item | Path |
 | --- | --- |
-| Programa | `%LOCALAPPDATA%\Programs\BarDock\BarDock.exe` |
-| Ajustes | `%APPDATA%\BarDock\settings.json` |
-| Acceso directo | Menú Inicio (`BarDock`) y, opcionalmente, escritorio |
-| Desinstalación | Configuración → Aplicaciones → BarDock |
+| Program | `%LOCALAPPDATA%\Programs\BarDock\BarDock.exe` |
+| Settings | `%APPDATA%\BarDock\settings.json` |
+| Shortcut | Start menu (`BarDock`) and, optionally, the desktop |
+| Uninstall | Settings → Apps → BarDock |
 
-Si vienes de la versión anterior (**MacDock**), la primera vez se copian automáticamente los
-ajustes desde `%APPDATA%\MacDock\settings.json`; no pierdes colores, tamaños ni relojes.
+If you come from the previous version (**MacDock**), your settings are copied automatically from
+`%APPDATA%\MacDock\settings.json` the first time; you keep colors, sizes and clocks.
 
-## Primer arranque
+## First run
 
-- La barra aparece en el borde superior (o inferior, si lo cambias) y la barra de Windows se oculta.
-- Se crea `settings.json` y se rellena con las aplicaciones **ancladas** a la barra de tareas.
-- Para volver a abrir BarDock cuando la cierres:
-  - **Inicio → BarDock**, o el acceso directo del escritorio.
+- The bar appears at the top edge (or the bottom, if you change it) and the Windows taskbar is
+  hidden.
+- `settings.json` is created and filled with the apps **pinned** to the taskbar.
+- To open BarDock again after closing it:
+  - **Start → BarDock**, or the desktop shortcut.
   - `Win + R` → `%LOCALAPPDATA%\Programs\BarDock\BarDock.exe`.
-  - Si ya está abierta, abrirla de nuevo **la trae al frente** (no se duplica).
+  - If it is already running, opening it again **brings it to the front** (no duplicates).
 
-## Actualizar
+## Update
 
-Ejecuta el instalador nuevo: cierra BarDock de forma ordenada, sustituye los archivos y conserva
-tus ajustes. No hace falta desinstalar antes.
+Run the new installer: it closes BarDock cleanly, replaces the files and keeps your settings. No
+need to uninstall first.
 
-## Desinstalar
+## Uninstall
 
-- **Configuración → Aplicaciones → BarDock → Desinstalar**, o
+- **Settings → Apps → BarDock → Uninstall**, or
 - `"%LOCALAPPDATA%\Programs\BarDock\BarDock.exe" --uninstall`.
 
-Se cierra la barra, se restauran la barra de Windows y el área de trabajo, y se borran accesos
-directos, entradas del registro y la carpeta de instalación. Tus ajustes de `%APPDATA%\BarDock`
-se conservan por si vuelves a instalarlo.
+The bar closes, the Windows taskbar and the work area are restored, and shortcuts, registry
+entries and the install folder are removed. Your settings in `%APPDATA%\BarDock` are kept in case
+you install it again.
 
-## Problemas frecuentes
+## Common problems
 
-**Windows avisa al ejecutar el instalador.**
-Es un ejecutable propio sin firma de código. Pulsa *Más información → Ejecutar de todas formas*.
+**Windows warns when running the installer.**
+It is our own executable without code signing. Click *More info → Run anyway*.
 
-**He cerrado BarDock a la fuerza y la barra de Windows no vuelve.**
-Abre BarDock y ciérralo con normalidad (**clic derecho → Salir**), o reinicia el Explorador desde
-el Administrador de tareas.
+**I killed BarDock and the Windows taskbar does not come back.**
+Open BarDock and close it normally (**right click → Quit**), or restart Explorer from Task
+Manager.
 
-**No aparece la barra.**
-Comprueba que no haya otra instancia en el Administrador de tareas. Si el proceso está pero no se
-ve, abre BarDock de nuevo: la instancia existente se trae al frente.
+**The bar does not appear.**
+Check Task Manager for another instance. If the process is running but you cannot see it, open
+BarDock again: the existing instance is brought to the front.
 
-**Solo aparece en un monitor.**
-BarDock vive en el **monitor principal** y ocupa todo su ancho. Es una limitación conocida.
+**It only shows on one monitor.**
+BarDock lives on the **primary monitor** and spans its full width. This is a known limitation.
 
-**Quiero volver a la barra de Windows.**
-Clic derecho en la barra → **Sustituir la barra de Windows** (se desactiva). BarDock se coloca
-junto a la barra de Windows para que puedas seguir usando su menú.
+**I want the Windows taskbar back.**
+Right click the bar → **Replace the Windows taskbar** (turn it off). BarDock moves next to the
+taskbar so you can still use its menu.
