@@ -21,6 +21,13 @@ tipo macOS, relojes de varias zonas horarias, fecha, estado del sistema, bandeja
 previa de las ventanas de cada aplicación. Sustituye la barra de tareas de Windows y se adapta a
 cómo quieras trabajar: arriba o abajo, iconos centrados o a la izquierda, en español o inglés.
 
+## Documentación
+
+- **[Guía de instalación](docs/INSTALL.md)**: requisitos, instalación, actualización, desinstalación
+  y problemas frecuentes.
+- **[Manual de usuario](docs/MANUAL.md)**: todo lo que hace la barra, menús, relojes, ajustes y
+  preguntas frecuentes.
+
 ## Características
 
 - **Iconos con magnificación** estilo dock: crecen hacia dentro de la pantalla mientras el icono
@@ -39,7 +46,8 @@ cómo quieras trabajar: arriba o abajo, iconos centrados o a la izquierda, en es
 
 ## Instalar
 
-Descarga `BarDockSetup.exe` de la sección **Releases** y ejecútalo.
+Descarga `BarDockSetup.exe` de la sección **Releases** y ejecútalo. Los pasos detallados están en
+la **[guía de instalación](docs/INSTALL.md)**.
 
 - Instalación **por usuario** en `%LOCALAPPDATA%\Programs\BarDock` (sin administrador).
 - Crea accesos directos en Inicio y, opcionalmente, en el escritorio.
@@ -48,6 +56,12 @@ Descarga `BarDockSetup.exe` de la sección **Releases** y ejecútalo.
 
 > Windows puede avisar de que el instalador no está firmado: **Más información → Ejecutar de todas
 > formas**. Es un ejecutable propio, sin firma de código.
+
+## Licencia
+
+**MIT** — software libre y abierto: puedes usar, copiar, modificar, fusionar, publicar, distribuir,
+sublicenciar y vender copias, conservando el aviso de copyright y la licencia. Consulta
+[LICENSE](LICENSE).
 
 ## Ejecutar en desarrollo
 
@@ -165,7 +179,3 @@ BarDock.exe --dump-windows
 
 `--dump-icons` deja los iconos extraídos en `%TEMP%\barDock-icons`; `--dump-windows` deja en
 `%TEMP%\barDock-windows.txt` las ventanas agrupadas por aplicación.
-
-## Licencia
-
-[MIT](LICENSE). Hecho con cariño para Windows 11.
