@@ -13,7 +13,7 @@
     <RootNamespace>BarDock</RootNamespace>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <ApplicationIcon>icon.ico</ApplicationIcon>
-    <Version>1.0.1</Version>
+    <Version>1.0.2</Version>
     <Product>BarDock</Product>
     <Description>Your desktop, your way. Barra superior minimalista para Windows 11.</Description>
     <Company>BarDock</Company>
