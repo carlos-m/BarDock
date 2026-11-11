@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AssemblyName>BarDockSetup</AssemblyName>
+    <RootNamespace>BarDock.Setup</RootNamespace>
+    <ApplicationIcon>..\icon.ico</ApplicationIcon>
+    <Version>1.0.0</Version>
+    <Product>BarDock</Product>
+    <Description>Instalador de BarDock</Description>
+    <ApplicationHighDpiMode>PerMonitorV2</ApplicationHighDpiMode>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Lo genera build-setup.cmd antes de compilar este proyecto. -->
+    <EmbeddedResource Include="payload\BarDock.exe" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,43 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <!-- WFAC010: el manifiesto ya declara el DPI; la app es WPF, no WinForms. -->
+    <NoWarn>$(NoWarn);WFAC010</NoWarn>
+    <UseWPF>true</UseWPF>
+    <UseWindowsForms>true</UseWindowsForms>
+    <AssemblyName>BarDock</AssemblyName>
+    <RootNamespace>BarDock</RootNamespace>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
+    <Version>1.0.0</Version>
+    <Product>BarDock</Product>
+    <Description>Your desktop, your way. Barra superior minimalista para Windows 11.</Description>
+    <Company>BarDock</Company>
+    <Authors>BarDock</Authors>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- WinForms anade System.Windows.Forms/System.Drawing a los usings implicitos y
+         choca con WPF; aqui solo se usa el ColorDialog con nombre completo. -->
+    <Using Remove="System.Windows.Forms" />
+    <Using Remove="System.Drawing" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="icon.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- El proyecto del instalador vive aqui dentro; no forma parte de la app. -->
+    <Compile Remove="Setup\**" />
+    <EmbeddedResource Remove="Setup\**" />
+    <None Remove="Setup\**" />
+    <Page Remove="Setup\**" />
+  </ItemGroup>
+
+</Project>

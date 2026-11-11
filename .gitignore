@@ -1,0 +1,18 @@
+# Build output
+bin/
+obj/
+dist/
+Setup/bin/
+Setup/obj/
+Setup/payload/
+Setup/out/
+
+# IDE / usuario
+.vs/
+.idea/
+*.user
+*.suo
+
+# Sistema
+Thumbs.db
+desktop.ini

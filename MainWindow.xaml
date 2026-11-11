@@ -1,0 +1,97 @@
+<Window x:Class="BarDock.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="BarDock"
+        Icon="/icon.ico"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="{x:Null}"
+        ShowInTaskbar="False"
+        ShowActivated="False"
+        Topmost="True"
+        ResizeMode="NoResize"
+        SizeToContent="Manual"
+        WindowStartupLocation="Manual"
+        UseLayoutRounding="True"
+        SnapsToDevicePixels="True"
+        TextOptions.TextFormattingMode="Display"
+        MouseMove="Window_MouseMove"
+        MouseLeave="Window_MouseLeave"
+        AllowDrop="True"
+        DragOver="Window_DragOver"
+        Drop="Window_Drop">
+
+  <Grid x:Name="Root" Background="{x:Null}" ClipToBounds="False">
+
+    <!-- Zona transparente que mantiene el raton dentro de la ventana mientras
+         los iconos ampliados sobresalen por debajo de la barra. -->
+    <Border x:Name="HoverBand"
+            VerticalAlignment="Top"
+            HorizontalAlignment="Stretch"
+            Background="Transparent"
+            IsHitTestVisible="False" />
+
+    <Border x:Name="Bar"
+            VerticalAlignment="Top"
+            ClipToBounds="False"
+            BorderThickness="0"
+            MouseRightButtonUp="Bar_MouseRightButtonUp">
+
+      <Grid ClipToBounds="False">
+
+        <Grid x:Name="ItemsHost"
+              HorizontalAlignment="Center"
+              VerticalAlignment="Top"
+              ClipToBounds="False">
+          <StackPanel x:Name="Stack"
+                      Orientation="Horizontal"
+                      HorizontalAlignment="Center"
+                      VerticalAlignment="Top"
+                      ClipToBounds="False" />
+        </Grid>
+
+        <!-- Boton de Inicio, a la izquierda -->
+        <StackPanel x:Name="LeftPanel"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Margin="12,0,0,0" />
+
+        <StackPanel x:Name="RightPanel"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    Margin="0,0,14,0">
+
+          <StackPanel x:Name="TrayPanel"
+                      Orientation="Horizontal"
+                      VerticalAlignment="Center"
+                      MouseRightButtonUp="TrayPanel_MouseRightButtonUp" />
+
+          <Border x:Name="TrayEdge"
+                  Width="1"
+                  Height="18"
+                  Margin="10,0,12,0"
+                  VerticalAlignment="Center" />
+
+          <StackPanel x:Name="StatusPanel"
+                      Orientation="Horizontal"
+                      VerticalAlignment="Center"
+                      MouseRightButtonUp="StatusPanel_MouseRightButtonUp" />
+
+          <Border x:Name="TraySeparator"
+                  Width="1"
+                  Height="18"
+                  Margin="10,0,12,0"
+                  VerticalAlignment="Center" />
+
+          <StackPanel x:Name="ClockPanel"
+                      Orientation="Horizontal"
+                      VerticalAlignment="Center"
+                      MouseRightButtonUp="ClockPanel_MouseRightButtonUp" />
+        </StackPanel>
+
+      </Grid>
+    </Border>
+  </Grid>
+</Window>
