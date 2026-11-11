@@ -17,6 +17,10 @@
 </p>
 
 <p align="center">
+  <a href="https://github.com/carlos-m/BarDock/releases/latest/download/BarDockSetup.exe"><img alt="Descargar BarDock para Windows 11" src="https://img.shields.io/badge/Descargar-BarDockSetup.exe-1e1e1e?style=for-the-badge"></a>
+</p>
+
+<p align="center">
   <img src="docs/captura.png" alt="BarDock">
 </p>
 
@@ -50,8 +54,9 @@ cómo quieras trabajar: arriba o abajo, iconos centrados o a la izquierda, en es
 
 ## Instalar
 
-Descarga `BarDockSetup.exe` de la sección **Releases** y ejecútalo. Los pasos detallados están en
-la **[guía de instalación](docs/INSTALL.es.md)**.
+Descarga **[BarDockSetup.exe](https://github.com/carlos-m/BarDock/releases/latest/download/BarDockSetup.exe)**
+(última versión) y ejecútalo. Los pasos detallados están en la
+**[guía de instalación](docs/INSTALL.es.md)**.
 
 - Instalación **por usuario** en `%LOCALAPPDATA%\Programs\BarDock` (sin administrador).
 - Crea accesos directos en Inicio y, opcionalmente, en el escritorio.

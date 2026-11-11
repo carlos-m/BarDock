@@ -17,6 +17,10 @@
 </p>
 
 <p align="center">
+  <a href="https://github.com/carlos-m/BarDock/releases/latest/download/BarDockSetup.exe"><img alt="Download BarDock for Windows 11" src="https://img.shields.io/badge/Download-BarDockSetup.exe-1e1e1e?style=for-the-badge"></a>
+</p>
+
+<p align="center">
   <img src="docs/captura.png" alt="BarDock">
 </p>
 
@@ -49,8 +53,8 @@ centered or aligned left, in English or Spanish.
 
 ## Install
 
-Download `BarDockSetup.exe` from **Releases** and run it. The detailed steps are in the
-**[installation guide](docs/INSTALL.md)**.
+Download **[BarDockSetup.exe](https://github.com/carlos-m/BarDock/releases/latest/download/BarDockSetup.exe)**
+(latest release) and run it. The detailed steps are in the **[installation guide](docs/INSTALL.md)**.
 
 - **Per-user** install in `%LOCALAPPDATA%\Programs\BarDock` (no administrator).
 - Creates Start menu shortcuts and, optionally, a desktop shortcut.

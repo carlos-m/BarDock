@@ -11,7 +11,8 @@
 
 ## Install
 
-1. Download **`BarDockSetup.exe`** from the repository's **Releases** section.
+1. Download **[`BarDockSetup.exe`](https://github.com/carlos-m/BarDock/releases/latest/download/BarDockSetup.exe)**
+   (latest release).
 2. Double-click the file.
 3. If Windows shows **"Windows protected your PC"**, click **More info → Run anyway**. This is
    normal: the installer is not signed with a code-signing certificate.
