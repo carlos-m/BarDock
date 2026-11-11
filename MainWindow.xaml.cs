@@ -55,6 +55,7 @@ public partial class MainWindow : Window
     private Border _volumeButton = null!;
     private SystemStatusSnapshot _status;
     private bool _statusApplied;
+    private bool _closed;
 
     private Brush _foreground = Brushes.White;
     private Brush _subtle = Brushes.Gray;
@@ -93,13 +94,18 @@ public partial class MainWindow : Window
         _theme = Theme.Read();
         ApplyTheme(_theme, force: true);
         ApplyMetrics();
-        BuildItems();
+
+        // Primera pasada sin enumerar ventanas: la barra se pinta ya con los anclados y las
+        // apps abiertas se anaden en cuanto termina la enumeracion en segundo plano.
+        BuildItems(withRunning: false);
         BuildClocks();
         UpdateStatus();
+        WarmUpRunningApps();
 
         Loaded += OnWindowLoaded;
         Closed += (_, _) =>
         {
+            _closed = true;
             _clockTimer.Stop();
             _refreshTimer.Stop();
             _hoverTimer.Stop();
@@ -406,12 +412,14 @@ public partial class MainWindow : Window
 
     // ---------------------------------------------------------------- iconos
 
-    private void BuildItems()
+    private void BuildItems(bool withRunning = true)
     {
         CloseWindowPopup();
         _hoverView = null;
 
-        var running = RunningApps.Get();
+        // La primera enumeracion de ventanas es cara (~700 ms la primera vez): se puede
+        // saltar para pintar la barra antes.
+        var running = withRunning ? RunningApps.Get() : new List<RunningApp>();
 
         var extras = running
             .Where(app => !IsPinned(app))
@@ -459,6 +467,27 @@ public partial class MainWindow : Window
         ApplyMetrics();
     }
 
+    /// <summary>
+    /// La primera enumeracion de ventanas cuesta ~700 ms (JIT + shell). Se hace fuera del hilo
+    /// de UI y, al terminar, se repinta la barra con las apps abiertas.
+    /// </summary>
+    private async void WarmUpRunningApps()
+    {
+        try
+        {
+            await Task.Run(RunningApps.Get);
+
+            if (!_closed)
+            {
+                BuildItems();
+            }
+        }
+        catch
+        {
+            // sin enumeracion: se quedan solo los anclados
+        }
+    }
+
     /// <summary>Una app esta anclada si comparte AUMID (o proceso, para .exe/.lnk).</summary>
     private bool IsPinned(RunningApp app)
     {
@@ -500,7 +529,9 @@ public partial class MainWindow : Window
 
     private void AddView(ItemView view)
     {
-        var icon = IconExtractor.GetIcon(view.Path, view.Aumid);
+        // Solo se mira la cache: si el icono no esta, la barra se dibuja ya con la inicial y el
+        // icono real llega en segundo plano.
+        var icon = IconExtractor.TryGetIcon(view.Path, view.Aumid);
         var bottom = _settings.BarAtBottom;
 
         // Con la barra abajo los iconos crecen hacia arriba y el indicador va encima.
@@ -512,33 +543,35 @@ public partial class MainWindow : Window
             RenderTransformOrigin = new Point(0.5, bottom ? 1.0 : 0.0),
         };
 
-        if (icon is not null)
+        var image = new Image
         {
-            var image = new Image
-            {
-                Source = icon,
-                Stretch = Stretch.Uniform,
-                SnapsToDevicePixels = true,
-            };
-            RenderOptions.SetBitmapScalingMode(image, BitmapScalingMode.HighQuality);
-            holder.Children.Add(image);
-        }
-        else
+            Source = icon,
+            Stretch = Stretch.Uniform,
+            SnapsToDevicePixels = true,
+            Visibility = icon is null ? Visibility.Collapsed : Visibility.Visible,
+        };
+        RenderOptions.SetBitmapScalingMode(image, BitmapScalingMode.HighQuality);
+
+        var placeholder = new Border
         {
-            holder.Children.Add(new Border
+            CornerRadius = new CornerRadius(_settings.IconSize * 0.22),
+            Background = new SolidColorBrush(Color.FromRgb(0x4A, 0x4A, 0x52)),
+            Visibility = icon is null ? Visibility.Visible : Visibility.Collapsed,
+            Child = new TextBlock
             {
-                CornerRadius = new CornerRadius(_settings.IconSize * 0.22),
-                Background = new SolidColorBrush(Color.FromRgb(0x4A, 0x4A, 0x52)),
-                Child = new TextBlock
-                {
-                    Text = IconExtractor.InitialFor(view.Name),
-                    Foreground = Brushes.White,
-                    FontSize = _settings.IconSize * 0.45,
-                    HorizontalAlignment = HorizontalAlignment.Center,
-                    VerticalAlignment = VerticalAlignment.Center,
-                },
-            });
-        }
+                Text = IconExtractor.InitialFor(view.Name),
+                Foreground = Brushes.White,
+                FontSize = _settings.IconSize * 0.45,
+                HorizontalAlignment = HorizontalAlignment.Center,
+                VerticalAlignment = VerticalAlignment.Center,
+            },
+        };
+
+        holder.Children.Add(image);
+        holder.Children.Add(placeholder);
+
+        view.IconElement = image;
+        view.Placeholder = placeholder;
 
         var scale = new ScaleTransform(1.0, 1.0);
         var translate = new TranslateTransform(0.0, 0.0);
@@ -626,6 +659,37 @@ public partial class MainWindow : Window
 
         _views.Add(view);
         Stack.Children.Add(container);
+
+        if (icon is null)
+        {
+            LoadIconAsync(view);
+        }
+    }
+
+    /// <summary>Pinta el icono cuando llega, sin bloquear el arranque de la barra.</summary>
+    private async void LoadIconAsync(ItemView view)
+    {
+        try
+        {
+            var icon = await IconExtractor.GetIconAsync(view.Path, view.Aumid);
+
+            if (icon is null || view.IconElement is null || !_views.Contains(view))
+            {
+                return;
+            }
+
+            view.IconElement.Source = icon;
+            view.IconElement.Visibility = Visibility.Visible;
+
+            if (view.Placeholder is not null)
+            {
+                view.Placeholder.Visibility = Visibility.Collapsed;
+            }
+        }
+        catch
+        {
+            // sin icono: se queda la inicial
+        }
     }
 
     // ---------------------------------------------------------------- ventanas por icono
@@ -2037,6 +2101,10 @@ public partial class MainWindow : Window
         public Grid Container { get; set; } = null!;
 
         public FrameworkElement Holder { get; set; } = null!;
+
+        public Image? IconElement { get; set; }
+
+        public FrameworkElement? Placeholder { get; set; }
 
         public ScaleTransform Scale { get; set; } = null!;
 

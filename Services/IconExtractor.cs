@@ -1,5 +1,6 @@
 using System.IO;
 using System.Runtime.InteropServices;
+using System.Threading;
 using System.Windows;
 using System.Windows.Interop;
 using System.Windows.Media;
@@ -14,20 +15,101 @@ public static class IconExtractor
     private static readonly Dictionary<string, ImageSource?> Cache =
         new(StringComparer.OrdinalIgnoreCase);
 
+    private static readonly object CacheGate = new();
+
+    /// <summary>Icono ya extraido, o null si no esta en cache. No bloquea: no toca el shell.</summary>
+    public static ImageSource? TryGetIcon(string path, string? aumid = null)
+    {
+        var key = Key(path, aumid);
+        if (key is null)
+        {
+            return null;
+        }
+
+        lock (CacheGate)
+        {
+            return Cache.TryGetValue(key, out var cached) ? cached : null;
+        }
+    }
+
+    /// <summary>
+    /// Extrae el icono en un hilo STA propio (el shell prefiere ese apartamento) para no
+    /// bloquear el hilo de UI: al arrancar, la barra se dibuja con la inicial y los iconos
+    /// llegan en paralelo.
+    /// </summary>
+    public static Task<ImageSource?> GetIconAsync(string path, string? aumid = null)
+    {
+        var completion = new TaskCompletionSource<ImageSource?>(
+            TaskCreationOptions.RunContinuationsAsynchronously);
+
+        var thread = new Thread(() =>
+        {
+            try
+            {
+                completion.TrySetResult(GetIcon(path, aumid));
+            }
+            catch (Exception ex)
+            {
+                completion.TrySetException(ex);
+            }
+        })
+        {
+            IsBackground = true,
+            Name = "BarDock icon",
+        };
+
+        thread.SetApartmentState(ApartmentState.STA);
+        thread.Start();
+
+        return completion.Task;
+    }
+
     public static ImageSource? GetIcon(string path, string? aumid = null)
+    {
+        var key = Key(path, aumid);
+        if (key is null)
+        {
+            return null;
+        }
+
+        lock (CacheGate)
+        {
+            if (Cache.TryGetValue(key, out var cached))
+            {
+                return cached;
+            }
+        }
+
+        var icon = Extract(path, aumid);
+
+        lock (CacheGate)
+        {
+            Cache[key] = icon;
+        }
+
+        return icon;
+    }
+
+    public static void ClearCache()
+    {
+        lock (CacheGate)
+        {
+            Cache.Clear();
+        }
+    }
+
+    private static string? Key(string path, string? aumid)
     {
         if (string.IsNullOrWhiteSpace(path) && string.IsNullOrWhiteSpace(aumid))
         {
             return null;
         }
 
-        var key = string.IsNullOrWhiteSpace(aumid) ? path : $"{path}|{aumid}";
+        return string.IsNullOrWhiteSpace(aumid) ? path : $"{path}|{aumid}";
+    }
 
-        if (Cache.TryGetValue(key, out var cached))
-        {
-            return cached;
-        }
-
+    private static ImageSource? Extract(string path, string? aumid)
+    {
         ImageSource? icon = null;
 
         try
@@ -54,11 +136,8 @@ public static class IconExtractor
             icon.Freeze();
         }
 
-        Cache[key] = icon;
         return icon;
     }
-
-    public static void ClearCache() => Cache.Clear();
 
     /// <summary>Extrae el icono directamente del recurso (funciona con .exe y resuelve .lnk).</summary>
     private static ImageSource? FromPrivateExtractIcons(string path, int size)
